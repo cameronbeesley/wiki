@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.shortcuts import redirect
 import markdown2
+from random import choice
 
 from . import util
 
@@ -105,3 +106,7 @@ def edit(request, entry):
         "form": edit_page_form(initial={"content": util.get_entry(entry)}),
         "error_messages": []
     })
+
+def random(request):
+    entry = choice(util.list_entries())
+    return redirect("wiki", entry=entry)
